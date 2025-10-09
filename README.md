@@ -7,60 +7,181 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+![alt text](https://github.com/Dellafaiza/uptd-smpn-unggulan-sindang-berdasarkan-zonasi-berbasis-web/blob/main/public/1.png?raw=true)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![alt text](https://github.com/Dellafaiza/uptd-smpn-unggulan-sindang-berdasarkan-zonasi-berbasis-web/blob/main/public/2.png?raw=true)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+![alt text](https://github.com/Dellafaiza/uptd-smpn-unggulan-sindang-berdasarkan-zonasi-berbasis-web/blob/main/public/3.png?raw=true)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![alt text](https://github.com/Dellafaiza/uptd-smpn-unggulan-sindang-berdasarkan-zonasi-berbasis-web/blob/main/public/4.png?raw=true)
 
-## Learning Laravel
+![alt text](https://github.com/Dellafaiza/uptd-smpn-unggulan-sindang-berdasarkan-zonasi-berbasis-web/blob/main/public/5.png?raw=true)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# 🏫 Website UPTD SMPN Unggulan Sindang
 
-## Laravel Sponsors
+Website profil sekolah dan sistem Penerimaan Peserta Didik Baru (PPDB) online berbasis zonasi untuk UPTD SMPN Unggulan Sindang, Indramayu, Jawa Barat.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 📋 Tentang Proyek
 
-### Premium Partners
+Aplikasi web ini dikembangkan untuk memudahkan proses penerimaan peserta didik baru di UPTD SMPN Unggulan Sindang dengan sistem seleksi berbasis zonasi. Sistem ini secara otomatis menghitung jarak tempat tinggal calon siswa ke sekolah dan menentukan kuota penerimaan berdasarkan zona yang telah ditetapkan, sesuai dengan peraturan Permendikbud tentang PPDB berbasis zonasi.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## ✨ Fitur Utama
 
-## Contributing
+### Website Profil Sekolah
+- 📰 Informasi lengkap tentang sekolah (visi, misi, sejarah)
+- 🏆 Profil sekolah unggulan dan prestasi
+- 👥 Profil guru dan tenaga kependidikan
+- 🎓 Program unggulan dan kegiatan ekstrakurikuler
+- 📸 Galeri foto dan dokumentasi kegiatan
+- 📢 Berita dan pengumuman terkini
+- 📞 Informasi kontak dan lokasi sekolah
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Sistem PPDB Berbasis Zonasi
+- 📍 **Sistem Zonasi Otomatis** - Perhitungan jarak otomatis dari alamat rumah ke sekolah
+- 🗺️ **Google Maps Integration** - Validasi alamat dan mapping lokasi
+- 📝 Formulir pendaftaran online lengkap dengan data zonasi
+- 📤 Upload dokumen persyaratan (KK, Akta Kelahiran, dll)
+- 🎯 **Seleksi Otomatis Berdasarkan Zona:**
+  - Zona 1: Prioritas utama (jarak terdekat)
+  - Zona 2: Prioritas kedua
+  - Zona 3: Jalur umum
+- 📊 Dashboard monitoring kuota per zona
+- 🔍 Tracking status pendaftaran dan zona real-time
+- ✅ Verifikasi dan validasi data pendaftar
+- 📈 Laporan dan statistik PPDB per zona
+- 🔔 Notifikasi status penerimaan berdasarkan zona
+- 🖨️ Cetak bukti pendaftaran dengan informasi zona
+- 📉 Perhitungan ranking berdasarkan jarak dan nilai
 
-## Code of Conduct
+### Fitur Admin
+- 👨‍💼 Dashboard admin lengkap
+- ⚙️ Pengaturan batas zona (radius dalam kilometer)
+- 📋 Pengaturan kuota per zona
+- 🗓️ Manajemen jadwal PPDB
+- ✏️ Verifikasi manual untuk kasus khusus
+- 📊 Laporan statistik dan visualisasi data zonasi
+- 📧 Sistem notifikasi ke pendaftar
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🛠️ Teknologi yang Digunakan
 
-## Security Vulnerabilities
+- **Framework:** Laravel (PHP)
+- **Frontend:** Blade Template, Bootstrap/Tailwind CSS, JavaScript
+- **Database:** MySQL
+- **Maps API:** Google Maps API / Leaflet.js
+- **Authentication:** Laravel Breeze/Sanctum
+- **File Storage:** Laravel Storage
+- **Geocoding:** Google Geocoding API untuk konversi alamat ke koordinat
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📦 Persyaratan Sistem
 
-## License
+- PHP >= 8.1
+- Composer
+- MySQL/MariaDB >= 5.7
+- Node.js & NPM (untuk asset compilation)
+- Apache/Nginx
+- Google Maps API Key (untuk fitur zonasi)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🚀 Instalasi
+
+1. Clone repository
+```bash
+git clone https://github.com/username/uptd-smpn-unggulan-sindang.git
+cd uptd-smpn-unggulan-sindang
+```
+
+2. Install dependencies
+```bash
+composer install
+npm install
+```
+
+3. Copy file environment
+```bash
+cp .env.example .env
+```
+
+4. Generate application key
+```bash
+php artisan key:generate
+```
+
+5. Konfigurasi database dan Google Maps API di file `.env`
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ppdb_smpn_sindang
+DB_USERNAME=username
+DB_PASSWORD=password
+
+GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+```
+
+6. Jalankan migration dan seeder
+```bash
+php artisan migrate --seed
+```
+
+7. Compile assets
+```bash
+npm run dev
+```
+
+8. Jalankan aplikasi
+```bash
+php artisan serve
+```
+
+Aplikasi dapat diakses di `http://localhost:8000`
+
+## 🗺️ Konfigurasi Zonasi
+
+Setelah instalasi, login sebagai admin dan atur:
+
+1. **Koordinat Sekolah** - Tentukan titik koordinat sekolah sebagai pusat zonasi
+2. **Radius Zona** - Atur jarak untuk setiap zona:
+   - Zona 1: 0 - 3 km (contoh)
+   - Zona 2: 3 - 5 km (contoh)
+   - Zona 3: > 5 km (contoh)
+3. **Kuota Per Zona** - Tentukan jumlah siswa yang diterima per zona
+
+
+## 📐 Cara Kerja Sistem Zonasi
+
+1. **Pendaftaran** - Calon siswa mengisi formulir dengan alamat lengkap
+2. **Geocoding** - Sistem mengkonversi alamat menjadi koordinat GPS
+3. **Perhitungan Jarak** - Sistem menghitung jarak dari rumah ke sekolah menggunakan rumus Haversine
+4. **Penentuan Zona** - Siswa otomatis dimasukkan ke zona berdasarkan jarak
+5. **Seleksi** - Sistem memprioritaskan zona 1, lalu zona 2, kemudian zona 3
+6. **Ranking** - Dalam satu zona, siswa diranking berdasarkan jarak terdekat dan nilai
+
+## 📚 Dokumentasi Laravel
+
+Laravel memiliki [dokumentasi](https://laravel.com/docs) yang lengkap dan menyeluruh, serta video tutorial library yang membuat Anda mudah memulai dengan framework ini.
+
+Anda juga dapat mencoba [Laravel Bootcamp](https://bootcamp.laravel.com), di mana Anda akan dipandu membangun aplikasi Laravel modern dari awal.
+
+Jika tidak ingin membaca, [Laracasts](https://laracasts.com) dapat membantu. Laracasts berisi ribuan video tutorial tentang berbagai topik termasuk Laravel, modern PHP, unit testing, dan JavaScript.
+
+## 🤝 Kontribusi
+
+Kontribusi selalu diterima! Silakan buat pull request atau laporkan issue jika menemukan bug.
+
+Untuk berkontribusi pada Laravel framework, silakan lihat [panduan kontribusi Laravel](https://laravel.com/docs/contributions).
+
+## 📄 Lisensi
+
+Proyek ini dilisensikan di bawah [MIT license](https://opensource.org/licenses/MIT).
+
+
+## 🙏 Acknowledgments
+
+- Google Maps API untuk sistem pemetaan
+- Laravel Framework untuk fondasi aplikasi yang solid
+- Kementerian Pendidikan dan Kebudayaan untuk regulasi PPDB zonasi
+
+---
+
+Dikembangkan dengan ❤️ untuk pendidikan yang lebih baik dan merata
