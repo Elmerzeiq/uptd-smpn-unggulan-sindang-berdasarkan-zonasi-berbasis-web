@@ -1,0 +1,1 @@
+use Endroid\QrCode\QrCode;

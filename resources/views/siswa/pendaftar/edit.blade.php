@@ -1,0 +1,608 @@
+@extends('layouts.siswa.app')
+@section('title', 'Edit Data: ' . $user->nama_lengkap)
+
+@section('siswa_content')
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header mb-4">
+            <h3 class="page-title fw-bold text-warning">
+                <i class="bi bi-pencil-square me-2"></i> Edit Data Pendaftar
+                <span class="badge bg-warning text-dark ms-2">Data Saya</span>
+            </h3>
+            {{-- <div class="page-action">
+                <a href="{{ route('siswa.pendaftar.show', $user->id) }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-1"></i> Kembali
+                </a>
+            </div> --}}
+        </div>
+
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h5 class="alert-heading">Terjadi Kesalahan!</h5>
+            <ul class="mb-0">
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        <form action="{{ route('siswa.pendaftar.update', $user->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <div class="row g-4">
+                <!-- Main Form -->
+                <div class="col-md-8">
+                    <!-- Data Utama -->
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-person-badge me-2"></i>Data Utama
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="nama_lengkap" class="form-label fw-semibold">
+                                        Nama Lengkap <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control @error('nama_lengkap') is-invalid @enderror"
+                                        id="nama_lengkap" name="nama_lengkap"
+                                        value="{{ old('nama_lengkap', $user->nama_lengkap) }}" required>
+                                    @error('nama_lengkap')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nisn" class="form-label fw-semibold">
+                                        NISN <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control @error('nisn') is-invalid @enderror"
+                                        id="nisn" name="nisn" value="{{ old('nisn', $user->nisn) }}" required>
+                                    @error('nisn')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label fw-semibold">
+                                        Email <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                        id="email" name="email" value="{{ old('email', $user->email) }}" required>
+                                    @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="jalur_pendaftaran" class="form-label fw-semibold">
+                                        Jalur Pendaftaran <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select @error('jalur_pendaftaran') is-invalid @enderror"
+                                        id="jalur_pendaftaran" name="jalur_pendaftaran" required>
+                                        <option value="">Pilih Jalur</option>
+                                        <option value="domisili" {{ old('jalur_pendaftaran', $user->jalur_pendaftaran)
+                                            == 'domisili' ? 'selected' : '' }}>Domisili</option>
+                                        <option value="prestasi" {{ old('jalur_pendaftaran', $user->jalur_pendaftaran)
+                                            == 'prestasi' ? 'selected' : '' }}>Prestasi</option>
+                                        <option value="afirmasi" {{ old('jalur_pendaftaran', $user->jalur_pendaftaran)
+                                            == 'afirmasi' ? 'selected' : '' }}>Afirmasi</option>
+                                        <option value="mutasi" {{ old('jalur_pendaftaran', $user->jalur_pendaftaran) ==
+                                            'mutasi' ? 'selected' : '' }}>Mutasi</option>
+                                    </select>
+                                    @error('jalur_pendaftaran')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="alert alert-info small">
+                                        <i class="bi bi-info-circle me-1"></i>
+                                        <strong>No. Pendaftaran Anda:</strong> {{ $user->no_pendaftaran }} (tidak dapat
+                                        diubah)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Biodata -->
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header bg-light">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-person-lines-fill me-2"></i>Data Biodata
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="tempat_lahir" class="form-label fw-semibold">Tempat Lahir</label>
+                                    <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror"
+                                        id="tempat_lahir" name="tempat_lahir"
+                                        value="{{ old('tempat_lahir', $user->biodata->tempat_lahir ?? '') }}">
+                                    @error('tempat_lahir')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="tgl_lahir" class="form-label fw-semibold">Tanggal Lahir</label>
+                                    <input type="date" class="form-control @error('tgl_lahir') is-invalid @enderror"
+                                        id="tgl_lahir" name="tgl_lahir"
+                                        value="{{ old('tgl_lahir', $user->biodata?->tgl_lahir?->format('Y-m-d')) }}">
+                                    @error('tgl_lahir')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="jns_kelamin" class="form-label fw-semibold">Jenis Kelamin</label>
+                                    <select class="form-select @error('jns_kelamin') is-invalid @enderror"
+                                        id="jns_kelamin" name="jns_kelamin">
+                                        <option value="">Pilih Jenis Kelamin</option>
+                                        <option value="L" {{ old('jns_kelamin', $user->biodata->jns_kelamin ?? '') ==
+                                            'L' ? 'selected' : '' }}>Laki-laki</option>
+                                        <option value="P" {{ old('jns_kelamin', $user->biodata->jns_kelamin ?? '') ==
+                                            'P' ? 'selected' : '' }}>Perempuan</option>
+                                    </select>
+                                    @error('jns_kelamin')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="agama" class="form-label fw-semibold">Agama</label>
+                                    <select class="form-select @error('agama') is-invalid @enderror" id="agama"
+                                        name="agama">
+                                        <option value="">Pilih Agama</option>
+                                        <option value="Islam" {{ old('agama', $user->biodata->agama ?? '') == 'Islam' ?
+                                            'selected' : '' }}>Islam</option>
+                                        <option value="Kristen" {{ old('agama', $user->biodata->agama ?? '') ==
+                                            'Kristen' ? 'selected' : '' }}>Kristen</option>
+                                        <option value="Katholik" {{ old('agama', $user->biodata->agama ?? '') ==
+                                            'Katholik' ? 'selected' : '' }}>Katholik</option>
+                                        <option value="Hindu" {{ old('agama', $user->biodata->agama ?? '') == 'Hindu' ?
+                                            'selected' : '' }}>Hindu</option>
+                                        <option value="Buddha" {{ old('agama', $user->biodata->agama ?? '') == 'Buddha'
+                                            ? 'selected' : '' }}>Buddha</option>
+                                        <option value="Konghucu" {{ old('agama', $user->biodata->agama ?? '') ==
+                                            'Konghucu' ? 'selected' : '' }}>Konghucu</option>
+                                    </select>
+                                    @error('agama')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="asal_sekolah" class="form-label fw-semibold">Asal Sekolah</label>
+                                    <input type="text" class="form-control @error('asal_sekolah') is-invalid @enderror"
+                                        id="asal_sekolah" name="asal_sekolah"
+                                        value="{{ old('asal_sekolah', $user->biodata->asal_sekolah ?? '') }}"
+                                        placeholder="Contoh: SDN 1 Jakarta">
+                                    @error('asal_sekolah')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="alamat_rumah" class="form-label fw-semibold">Alamat Rumah</label>
+                                    <textarea class="form-control @error('alamat_rumah') is-invalid @enderror"
+                                        id="alamat_rumah" name="alamat_rumah" rows="3"
+                                        placeholder="Masukkan alamat lengkap rumah Anda">{{ old('alamat_rumah', $user->biodata->alamat_rumah ?? '') }}</textarea>
+                                    @error('alamat_rumah')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="anak_ke" class="form-label fw-semibold">Anak Ke</label>
+                                    <input type="number" class="form-control @error('anak_ke') is-invalid @enderror"
+                                        id="anak_ke" name="anak_ke"
+                                        value="{{ old('anak_ke', $user->biodata->anak_ke ?? '') }}" min="1" max="20">
+                                    @error('anak_ke')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Orang Tua -->
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header bg-light">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-house me-2"></i>Data Orang Tua
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold text-primary">Data Ayah</h6>
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="nama_ayah" class="form-label fw-semibold">Nama Ayah</label>
+                                            <input type="text"
+                                                class="form-control @error('nama_ayah') is-invalid @enderror"
+                                                id="nama_ayah" name="nama_ayah"
+                                                value="{{ old('nama_ayah', $user->orangTua->nama_ayah ?? '') }}">
+                                            @error('nama_ayah')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="no_hp_ayah" class="form-label fw-semibold">No. HP Ayah</label>
+                                            <input type="tel"
+                                                class="form-control @error('no_hp_ayah') is-invalid @enderror"
+                                                id="no_hp_ayah" name="no_hp_ayah"
+                                                value="{{ old('no_hp_ayah', $user->orangTua->no_hp_ayah ?? '') }}"
+                                                placeholder="08xxxxxxxxxx">
+                                            @error('no_hp_ayah')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="pekerjaan_ayah" class="form-label fw-semibold">Pekerjaan
+                                                Ayah</label>
+                                            <input type="text"
+                                                class="form-control @error('pekerjaan_ayah') is-invalid @enderror"
+                                                id="pekerjaan_ayah" name="pekerjaan_ayah"
+                                                value="{{ old('pekerjaan_ayah', $user->orangTua->pekerjaan_ayah ?? '') }}">
+                                            @error('pekerjaan_ayah')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="pendidikan_ayah" class="form-label fw-semibold">Pendidikan
+                                                Ayah</label>
+                                            <select class="form-select @error('pendidikan_ayah') is-invalid @enderror"
+                                                id="pendidikan_ayah" name="pendidikan_ayah">
+                                                <option value="">Pilih Pendidikan</option>
+                                                <option value="SD" {{ old('pendidikan_ayah', $user->
+                                                    orangTua->pendidikan_ayah ?? '') == 'SD' ? 'selected' : '' }}>SD
+                                                </option>
+                                                <option value="SMP" {{ old('pendidikan_ayah', $user->
+                                                    orangTua->pendidikan_ayah ?? '') == 'SMP' ? 'selected' : '' }}>SMP
+                                                </option>
+                                                <option value="SMA" {{ old('pendidikan_ayah', $user->
+                                                    orangTua->pendidikan_ayah ?? '') == 'SMA' ? 'selected' : ''
+                                                    }}>SMA/SMK</option>
+                                                <option value="D3" {{ old('pendidikan_ayah', $user->
+                                                    orangTua->pendidikan_ayah ?? '') == 'D3' ? 'selected' : '' }}>D3
+                                                </option>
+                                                <option value="S1" {{ old('pendidikan_ayah', $user->
+                                                    orangTua->pendidikan_ayah ?? '') == 'S1' ? 'selected' : '' }}>S1
+                                                </option>
+                                                <option value="S2" {{ old('pendidikan_ayah', $user->
+                                                    orangTua->pendidikan_ayah ?? '') == 'S2' ? 'selected' : '' }}>S2
+                                                </option>
+                                                <option value="S3" {{ old('pendidikan_ayah', $user->
+                                                    orangTua->pendidikan_ayah ?? '') == 'S3' ? 'selected' : '' }}>S3
+                                                </option>
+                                            </select>
+                                            @error('pendidikan_ayah')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold text-primary">Data Ibu</h6>
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="nama_ibu" class="form-label fw-semibold">Nama Ibu</label>
+                                            <input type="text"
+                                                class="form-control @error('nama_ibu') is-invalid @enderror"
+                                                id="nama_ibu" name="nama_ibu"
+                                                value="{{ old('nama_ibu', $user->orangTua->nama_ibu ?? '') }}">
+                                            @error('nama_ibu')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="no_hp_ibu" class="form-label fw-semibold">No. HP Ibu</label>
+                                            <input type="tel"
+                                                class="form-control @error('no_hp_ibu') is-invalid @enderror"
+                                                id="no_hp_ibu" name="no_hp_ibu"
+                                                value="{{ old('no_hp_ibu', $user->orangTua->no_hp_ibu ?? '') }}"
+                                                placeholder="08xxxxxxxxxx">
+                                            @error('no_hp_ibu')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="pekerjaan_ibu" class="form-label fw-semibold">Pekerjaan
+                                                Ibu</label>
+                                            <input type="text"
+                                                class="form-control @error('pekerjaan_ibu') is-invalid @enderror"
+                                                id="pekerjaan_ibu" name="pekerjaan_ibu"
+                                                value="{{ old('pekerjaan_ibu', $user->orangTua->pekerjaan_ibu ?? '') }}">
+                                            @error('pekerjaan_ibu')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="pendidikan_ibu" class="form-label fw-semibold">Pendidikan
+                                                Ibu</label>
+                                            <select class="form-select @error('pendidikan_ibu') is-invalid @enderror"
+                                                id="pendidikan_ibu" name="pendidikan_ibu">
+                                                <option value="">Pilih Pendidikan</option>
+                                                <option value="SD" {{ old('pendidikan_ibu', $user->
+                                                    orangTua->pendidikan_ibu ?? '') == 'SD' ? 'selected' : '' }}>SD
+                                                </option>
+                                                <option value="SMP" {{ old('pendidikan_ibu', $user->
+                                                    orangTua->pendidikan_ibu ?? '') == 'SMP' ? 'selected' : '' }}>SMP
+                                                </option>
+                                                <option value="SMA" {{ old('pendidikan_ibu', $user->
+                                                    orangTua->pendidikan_ibu ?? '') == 'SMA' ? 'selected' : ''
+                                                    }}>SMA/SMK</option>
+                                                <option value="D3" {{ old('pendidikan_ibu', $user->
+                                                    orangTua->pendidikan_ibu ?? '') == 'D3' ? 'selected' : '' }}>D3
+                                                </option>
+                                                <option value="S1" {{ old('pendidikan_ibu', $user->
+                                                    orangTua->pendidikan_ibu ?? '') == 'S1' ? 'selected' : '' }}>S1
+                                                </option>
+                                                <option value="S2" {{ old('pendidikan_ibu', $user->
+                                                    orangTua->pendidikan_ibu ?? '') == 'S2' ? 'selected' : '' }}>S2
+                                                </option>
+                                                <option value="S3" {{ old('pendidikan_ibu', $user->
+                                                    orangTua->pendidikan_ibu ?? '') == 'S3' ? 'selected' : '' }}>S3
+                                                </option>
+                                            </select>
+                                            @error('pendidikan_ibu')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Wali -->
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-light">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-person-plus me-2"></i>Data Wali <small
+                                    class="text-muted">(Opsional)</small>
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="nama_wali" class="form-label fw-semibold">Nama Wali</label>
+                                    <input type="text" class="form-control @error('nama_wali') is-invalid @enderror"
+                                        id="nama_wali" name="nama_wali"
+                                        value="{{ old('nama_wali', $user->wali->nama_wali ?? '') }}">
+                                    @error('nama_wali')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="hubungan_wali_dgn_calon_peserta" class="form-label fw-semibold">Hubungan
+                                        dengan Siswa</label>
+                                    <select
+                                        class="form-select @error('hubungan_wali_dgn_calon_peserta') is-invalid @enderror"
+                                        id="hubungan_wali_dgn_calon_peserta" name="hubungan_wali_dgn_calon_peserta">
+                                        <option value="">Pilih Hubungan</option>
+                                        <option value="Kakek" {{ old('hubungan_wali_dgn_calon_peserta', $user->
+                                            wali->hubungan_wali_dgn_calon_peserta ?? '') == 'Kakek' ? 'selected' : ''
+                                            }}>Kakek</option>
+                                        <option value="Nenek" {{ old('hubungan_wali_dgn_calon_peserta', $user->
+                                            wali->hubungan_wali_dgn_calon_peserta ?? '') == 'Nenek' ? 'selected' : ''
+                                            }}>Nenek</option>
+                                        <option value="Paman" {{ old('hubungan_wali_dgn_calon_peserta', $user->
+                                            wali->hubungan_wali_dgn_calon_peserta ?? '') == 'Paman' ? 'selected' : ''
+                                            }}>Paman</option>
+                                        <option value="Bibi" {{ old('hubungan_wali_dgn_calon_peserta', $user->
+                                            wali->hubungan_wali_dgn_calon_peserta ?? '') == 'Bibi' ? 'selected' : ''
+                                            }}>Bibi</option>
+                                        <option value="Kakak" {{ old('hubungan_wali_dgn_calon_peserta', $user->
+                                            wali->hubungan_wali_dgn_calon_peserta ?? '') == 'Kakak' ? 'selected' : ''
+                                            }}>Kakak</option>
+                                        <option value="Lainnya" {{ old('hubungan_wali_dgn_calon_peserta', $user->
+                                            wali->hubungan_wali_dgn_calon_peserta ?? '') == 'Lainnya' ? 'selected' : ''
+                                            }}>Lainnya</option>
+                                    </select>
+                                    @error('hubungan_wali_dgn_calon_peserta')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="no_hp_wali" class="form-label fw-semibold">No. HP Wali</label>
+                                    <input type="tel" class="form-control @error('no_hp_wali') is-invalid @enderror"
+                                        id="no_hp_wali" name="no_hp_wali"
+                                        value="{{ old('no_hp_wali', $user->wali->no_hp_wali ?? '') }}"
+                                        placeholder="08xxxxxxxxxx">
+                                    @error('no_hp_wali')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="alamat_wali" class="form-label fw-semibold">Alamat Wali</label>
+                                    <textarea class="form-control @error('alamat_wali') is-invalid @enderror"
+                                        id="alamat_wali" name="alamat_wali"
+                                        rows="3">{{ old('alamat_wali', $user->wali->alamat_wali ?? '') }}</textarea>
+                                    @error('alamat_wali')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-md-4">
+                    <!-- Current Status -->
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="card-title mb-0 text-white">
+                                <i class="bi bi-info-circle me-2"></i>Status Saat Ini
+                            </h5>
+                        </div>
+                        <div class="card-body text-center">
+                            @if($user->berkas && $user->berkas->file_pas_foto)
+                            <img src="{{ Storage::url($user->berkas->file_pas_foto) }}" alt="Foto Profil"
+                                class="rounded-circle mb-3 border-3 border-primary"
+                                style="width: 100px; height: 100px; object-fit: cover;">
+                            @else
+                            <div class="bg-light border border-3 border-dashed rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center"
+                                style="width: 100px; height: 100px;">
+                                <i class="bi bi-person fs-1 text-muted"></i>
+                            </div>
+                            @endif
+
+                            <h6 class="fw-bold">{{ $user->nama_lengkap }}</h6>
+                            <p class="text-muted small mb-2">{{ $user->email }}</p>
+                            <span
+                                class="badge bg-{{ $user->status_pendaftaran == 'lulus_seleksi' ? 'success' :
+                                (in_array($user->status_pendaftaran, ['tidak_lulus_seleksi', 'berkas_tidak_lengkap']) ? 'danger' :
+                                (in_array($user->status_pendaftaran, ['menunggu_verifikasi_berkas', 'berkas_diverifikasi']) ? 'info' : 'warning')) }} fs-6 px-3 py-2">
+                                {{ ucwords(str_replace('_', ' ', $user->status_pendaftaran ?? 'N/A')) }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Tips -->
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="card-title mb-0 text-white">
+                                <i class="bi bi-lightbulb me-2"></i>Tips Pengisian
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="small mb-0">
+                                <li>Pastikan semua data yang diisi akurat dan sesuai dokumen</li>
+                                <li>Nama harus sesuai dengan ijazah/akta kelahiran</li>
+                                <li>NISN dapat dicek di <a href="https://nisn.data.kemdikbud.go.id/"
+                                        target="_blank">sini</a></li>
+                                <li>Data orang tua wajib diisi untuk keperluan komunikasi</li>
+                                <li>Data wali diisi jika ada wali resmi</li>
+                                <li>Periksa kembali sebelum menyimpan</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Warning -->
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="card-title mb-0">
+                                <i class="bi bi-exclamation-triangle me-2"></i>Perhatian
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-warning small mb-3">
+                                <strong>Penting!</strong><br>
+                                • Data yang sudah disimpan akan direview oleh admin<br>
+                                • Pastikan data benar sebelum menyimpan<br>
+                                • Perubahan jalur pendaftaran perlu verifikasi ulang
+                            </div>
+
+                            @if($user->catatan_verifikasi)
+                            <div class="alert alert-info small">
+                                <strong>Catatan Admin:</strong><br>
+                                {{ $user->catatan_verifikasi }}
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-footer bg-light">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <a href="{{ route('siswa.pendaftar.show', $user->id) }}"
+                                        class="btn btn-outline-secondary">
+                                        <i class="bi bi-arrow-left me-2"></i>Kembali
+                                    </a>
+                                </div>
+                                <div>
+                                    <button type="reset" class="btn btn-outline-warning me-2"
+                                        onclick="return confirm('Apakah Anda yakin ingin mereset semua perubahan?')">
+                                        <i class="bi bi-arrow-clockwise me-2"></i>Reset
+                                    </button>
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="bi bi-check-circle me-2"></i>Simpan Perubahan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@push('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<style>
+    .page-action {
+        display: flex;
+        gap: 10px;
+    }
+
+    .form-label.fw-semibold {
+        font-weight: 600;
+    }
+
+    .text-danger {
+        color: #dc3545 !important;
+    }
+
+    .card {
+        transition: box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+</style>
+@endpush
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Konfirmasi sebelum submit
+        document.querySelector('form').addEventListener('submit', function(e) {
+            if (!confirm('Apakah Anda yakin data yang dimasukkan sudah benar?')) {
+                e.preventDefault();
+            }
+        });
+
+        // Auto format phone numbers
+        const phoneInputs = document.querySelectorAll('input[type="tel"]');
+        phoneInputs.forEach(input => {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.startsWith('62')) {
+                    value = '0' + value.substring(2);
+                }
+                if (value.length > 13) {
+                    value = value.substring(0, 13);
+                }
+                e.target.value = value;
+            });
+        });
+
+        // Highlight required fields
+        const requiredInputs = document.querySelectorAll('input[required], select[required]');
+        requiredInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.classList.add('border-warning');
+                } else {
+                    this.classList.remove('border-warning');
+                }
+            });
+        });
+    });
+</script>
+@endpush
+@endsection
